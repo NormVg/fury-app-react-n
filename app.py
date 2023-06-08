@@ -2,6 +2,7 @@ from flask import Flask ,request,jsonify,send_file,url_for,render_template
 from plugs.fury_carter import ask_fury
 from plugs.tts import gen
 
+aud_file  = []
 app = Flask(__name__)
 
 @app.route("/")
@@ -10,8 +11,8 @@ def index():
 
 @app.route("/fury-audio")
 def send_audio():
-
-    return send_file("static/temp.wav")
+    file_ = aud_file[0]
+    return send_file(file_)
 
 @app.route("/fury-res",methods=["GET","POST"])
 def fury_res():
@@ -19,7 +20,10 @@ def fury_res():
     print(command)
     response,forse = ask_fury(command, user="Norm")
 
-    gen(response)
+    aud = gen(response)
+    aud_file.clear()
+    aud_file.append(aud)
+    
     data = {
         "command":command,
         "reply":response,

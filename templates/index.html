@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>FURY</h1></center>
+   <center><div>
+        <h2 style="color: grey;" id="res-fury"></h2>
+        <input type="text" name="command" id="command-id">
+        <button onclick="myfury()" id="res-btn" >submit</button>
+   </div></center> 
+
+<script>
+function myfury(){
+    var comand =  document.getElementById("command-id")
+    var btn_f = document.getElementById("res-btn")
+
+    btn_f.disabled = true
+    comand.disabled = true
+
+    fetch('/fury-res?command='+comand.value)
+    .then((response) => response.json())
+    .then((json) => {
+        var audio_file = json['audio']
+        var response = json['reply']
+        console.log(audio_file)
+        console.log(response)
+        
+        var audio = new Audio(audio_file);
+        document.getElementById("res-fury").innerText = response
+
+        comand.value = ""
+        comand.disabled = false
+        btn_f.disabled = false
+
+        
+        audio.play();
+
+        
+
+    });
+    
+}
+</script>
+</body>
+</html>

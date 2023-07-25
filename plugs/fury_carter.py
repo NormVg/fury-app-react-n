@@ -10,6 +10,6 @@ def ask_fury(com,user):
         "key": carter_key,
         "user_id": "Vishnu" 
     }))
-    return response.json()['output']['text']
+    return response.json()['output']['text'],""
 
 # print(ask_fury("tell space news fury",""))

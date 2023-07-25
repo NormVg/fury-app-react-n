@@ -18,7 +18,7 @@ def send_audio():
 def fury_res():
     command = request.args.get("command")
     print(command)
-    response,forse = ask_fury(command, user="Norm")
+    response,_ = ask_fury(command, user="Norm")
 
     aud = gen(response)
     aud_file.clear()

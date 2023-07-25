@@ -6,7 +6,7 @@ def ask_fury(com,user):
     response = requests.post("https://api.carterlabs.ai/chat", headers={
         "Content-Type": "application/json"
     }, data=json.dumps({
-        "text": f"{user} : {command}",
+        "text": f"{user} : {com}",
         "key": carter_key,
         "user_id": "Vishnu" 
     }))
